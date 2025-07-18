@@ -46,7 +46,7 @@ public class ScoreRankClassUse {
 		
 		System.out.println("\n====성적결과====");
 		
-		//rank
+		// rank
 		for(int i=0;i<studentCount;i++) {
 			student[i].rank = i + 1;
 			
