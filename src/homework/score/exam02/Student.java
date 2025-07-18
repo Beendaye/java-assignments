@@ -17,6 +17,7 @@ public class Student {
 		
 		System.out.println("★ 총점 : " + total);
 		System.out.printf("★ 평균 : %.1f\n",avg);
+		
 	}
 }
 
