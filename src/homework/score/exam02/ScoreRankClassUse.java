@@ -32,7 +32,7 @@ public class ScoreRankClassUse {
 			System.out.println();
 		}
 		
-		// 버블 정렬
+		// 버블정렬
 		for(int i=0;i<4;i++) {
 			for(int j=0; j<4-i; j++) {			
 				if(student[j].total<student[j+1].total) {
