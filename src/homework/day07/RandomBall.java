@@ -16,8 +16,13 @@ public class RandomBall {
 	// 컴퓨터 랜덤숫자 생성
 	void comRandom() {
 		for(int i=0; i<comArr.length;i++) {
-			comArr[i] = (int) (Math.random() * 10);
+			int randNum = (int) (Math.random() * 10); // 랜덤으로 숫자 뽑아서
+			comArr[i] = randNum; // 배열에 저장
+			
+			// 중복 숫자 제거 ★★★ 이해하고 작성해볼것 
 		}
+		
+		System.out.println("숫자가 정해졌습니다.");
 	}
 	
 	// 사용자 입력
@@ -35,13 +40,54 @@ public class RandomBall {
 		 * 2) switch : 딱 떨어지는 선택지, boolean 타입은 사용 불가
 		 * */
 		comRandom();
+		
+		System.out.println("3개의 번호를 띄어쓰기로 하나씩 입력해주세요(예시: 1 2 3)");
+		
+		int gameCount = 0; // 반복 횟수 저장
 
-		while(true) {
-			// 사용자가 번호 3개 입력
-			System.out.println("번호를 입력해주세요.");
+		while(true) { // 실제 게임 반복문
 			
+			gameCount++; // 반복 횟수 증가
+			
+			// 사용자가 번호 3개 입력 + 배열에 저장
+			System.out.println("-------------------");
+			System.out.print("번호 3개 입력 : ");
+			
+			for(int i=0;i<inputArr.length;i++) {
+				inputArr[i] = scan.nextInt();
+			}
+			
+			// 결과에 출력해야 할 숫자 저장
+			int strike = 0;
+			int ball = 0;
+			
+			// 사용자와 컴퓨터 숫자 비교
+			for(int j=0;j<comArr.length;j++) { // 컴퓨터 숫자 하나 선택
+				for(int k=0;k<inputArr.length;k++) { // 사용자 숫자 하나 선택
+					// 배열의 위치와 실제 값 비교
+					if(j == k && comArr[j] == inputArr[k]) { // 위치와 값 모두 동일
+						// 바깥 for문 한 번 돌 때 안쪽에서 3번 도니까 여기서 갯수 증가 시키기
+						strike++;
+					} else if(j != k && comArr[j] == inputArr[k]) { // 위치 또는 값 동일
+						ball++;
+					}
+				}
+			}
+			
+			System.out.println("\u261E " + strike + "S " + ball + "B");
+			
+			// 게임 종료 조건문
+			if(strike == 3) {
+				break;
+			} else {
+				strike = 0;
+				ball = 0;
+			}
 			
 		}
+		
+		System.out.println("===========================");
+		System.out.println(gameCount + "번째에 성공하셨습니다.");
 		
 		
 	}
