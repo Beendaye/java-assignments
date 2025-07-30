@@ -32,8 +32,16 @@ public class StudentGradeList {
 		Collections.sort(stdList, new ScoreRankDesc());
 		
 		int rank = 1;
-		for(int i;i<stdList.size();i++) {
-			System.out.println(i + ":" + stdList.get);
+		for(int i=0; i<stdList.size(); i++) {
+			if(i>0 && stdList.get(i).getTotal() == stdList.get(i - 1).getTotal()) {
+				stdList.get(i).setRank(stdList.get(i - 1).getRank());
+				System.out.println((i) + "등" + " : " + stdList.get(i));
+			} else {
+				stdList.get(i).setRank(rank);
+				System.out.println((i + 1) + "등" + " : " + stdList.get(i));
+			}
+			
+			rank++;
 		}
 		
 	}

@@ -52,8 +52,8 @@ public class Student implements Comparable<Student> {
 	}
 
 	@Override
-	public int compareTo(Student otherStd) {
-		return getStudentId().compareTo(otherStd.getStudentId());
+	public int compareTo(Student std2) {
+		return getStudentId().compareTo(std2.getStudentId());
 	}
 
 }
