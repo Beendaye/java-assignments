@@ -1,31 +1,31 @@
 package homework.day13;
 
 public class Room {
-	private int roomNum;
-	private String roomType;
+	private String roomNum;
+	//private String roomType;
 	private String guest;
 	
-	public Room(int roomNum, String roomType, String guest) {
+	public Room(String roomNum, String guest) {
 		this.roomNum = roomNum;
-		this.roomType = roomType;
-		this.guest = null;
+		//this.roomType = roomTypeSet(roomNum);
+		this.guest = guest;
 	}
 
-	public int getRoomNum() {
+	public String getRoomNum() {
 		return roomNum;
 	}
 
-	public void setRoomNum(int roomNum) {
+	public void setRoomNum(String roomNum) {
 		this.roomNum = roomNum;
 	}
 
-	public String getRoomType() {
+	/*public String getRoomType() {
 		return roomType;
 	}
 
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
-	}
+	}*/
 
 	public String getGuest() {
 		return guest;
@@ -35,15 +35,24 @@ public class Room {
 		this.guest = guest;
 	}
 
-	
-	private String roomTypeSet(int roomNum) {
-		if(roomNum >= 201 && roomNum <=209) {
-			return "싱글룸";
-		} else if(roomNum >= 301 && roomNum <=309) {
-			return "더블룸";
-		} else if(roomNum >= 401 && roomNum <= 409) {
-			return "스위트룸";
-		} else return "잘못된 방번호";
+	@Override
+	public String toString() {
+		return "Room [roomNum=" + roomNum + ", guest=" + guest + "]";
 	}
+
+	
+	
+	/*private String roomTypeSet(String roomNum) {
+		
+		int num = Integer.parseInt(roomNum);
+		
+		if(num >= 201 && num <=209) {
+			return "싱글룸";
+		} else if(num >= 301 && num <=309) {
+			return "더블룸";
+		} else if(num >= 401 && num <= 409) {
+			return "스위트룸";
+		} else return "잘못된 룸넘버";
+	}*/
 	
 }
