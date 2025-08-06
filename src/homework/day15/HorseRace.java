@@ -7,11 +7,11 @@ import java.util.List;
 // 실행
 public class HorseRace {
 
-	
 	public static void main(String[] args) {
 		// List로 저장
 		List<Horse> horseList = new ArrayList<Horse>();
 		
+		// RaceState 생성
 		RaceState rs = new RaceState(horseList);
 		
 		// 데이터 추가
@@ -20,20 +20,24 @@ public class HorseRace {
 			horseList.add(new Horse(num));
 		}
 		
+		// 말 달리자
 		for(Horse h : horseList) {
 			h.start();
 		}
 		
+		// 중계 시작
 		rs.start();
 		
+		// 말이 다 뛸 때까지 대기(결과 출력 대기)
 		for(Horse h : horseList) {
 			try {
-				h.join();
+				h.join(); // join()을 하는 이유: main 스레드가 너무 빨리 끝나지 않게 기다려주는 용도
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		
+		// 중계가 끝날 때까지 대기
 		try {
 			rs.join();
 		} catch (InterruptedException e) {
@@ -84,7 +88,7 @@ class Horse extends Thread implements Comparable<Horse> {
 	public int getRank() {
 		return rank;
 	}
-
+	
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
@@ -117,11 +121,7 @@ class Horse extends Thread implements Comparable<Horse> {
 			}
 		}
 		
-		
-		//System.out.println(hName + "경기종료");
-		
-		currRank++;
-		rank = currRank;
+		rank = currRank++;
 		
 	}
 	/*
@@ -158,36 +158,38 @@ class Horse extends Thread implements Comparable<Horse> {
 	// 오름차순 정렬하기
 	@Override
 	public int compareTo(Horse h) {
-		return Integer.compare(this.getRank(), h.getRank());
+		return Integer.compare(this.getRank(), h.getRank()); //내 등수와 상대 등수 비교
 	}
 }
 
-// 경주
+// 경기 중계 (말들의 현재 위치 상태를 추적)
 /*
 01번말 --->------------------------------------
 02번말 ----->----------------------------------
 ...
 */
 class RaceState extends Thread {
-	private List<Horse> horseList;
+	private List<Horse> horseList; // 말들을 데려오자
 
 	public RaceState(List<Horse> horseList) {
-		super();
 		this.horseList = horseList;
 	}
-	
 
 	@Override
-	public void run() {
+	public void run() { // 말들의 현재 위치를 관찰해보자
 		while(true) {
 			
 			if(Horse.currRank == horseList.size()) {
 				break;
 			}
 			
+			for(int i=0;i<3;i++) {
+				System.out.println();
+			}
+			
 			for(int i=0;i<horseList.size();i++) {
 				Horse h = horseList.get(i);
-				System.out.println(h.gethName() + " : ");
+				System.out.print(h.gethName() + " : ");
 				
 				for(int j=1;j<=50;j++) {
 					if(j==h.getCrrLocation()) {
