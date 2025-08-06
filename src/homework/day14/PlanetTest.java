@@ -35,7 +35,7 @@ public class PlanetTest {
 		Planet planet;
 		
 		for(Planet p : Planet.values()) {
-			System.out.println(p.name() + " : " + p.getPlanetArea());
+			System.out.printf((p.name() + " : %.2fkm²\n"), p.getPlanetArea());
 		}
 	}
 }
