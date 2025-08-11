@@ -178,7 +178,8 @@ class RaceState extends Thread {
 	public void run() { // 말들의 현재 위치를 관찰해보자
 		while(true) {
 			
-			if(Horse.currRank == horseList.size() + 1) { // 마지막말이 도착하면 종료 (★ 왜 +1을 해야하는지 질문할 것!)
+			if(Horse.currRank == horseList.size() + 1) {
+
 				break;
 			}
 			
