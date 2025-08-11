@@ -164,9 +164,8 @@ class Horse extends Thread implements Comparable<Horse> {
 
 // 경기 중계 (말들의 현재 위치 상태를 추적)
 /*
-01번말 --->------------------------------------
-02번말 ----->----------------------------------
-...
+00번말 --->------------------------------------
+00번말 ----->----------------------------------
 */
 class RaceState extends Thread {
 	private List<Horse> horseList; // 말들을 데려오자
@@ -179,7 +178,7 @@ class RaceState extends Thread {
 	public void run() { // 말들의 현재 위치를 관찰해보자
 		while(true) {
 			
-			if(Horse.currRank == horseList.size()) {
+			if(Horse.currRank == horseList.size() + 1) { // 마지막말이 도착하면 종료 (★ 왜 +1을 해야하는지 질문할 것!)
 				break;
 			}
 			
@@ -192,7 +191,7 @@ class RaceState extends Thread {
 				System.out.print(h.gethName() + " : ");
 				
 				for(int j=1;j<=50;j++) {
-					if(j==h.getCrrLocation()) {
+					if(j==h.getCrrLocation()) { // 말의 현재 위치를 확인해서 집어넣기
 						System.out.print(">");
 					} else {
 						System.out.print("-");
@@ -200,7 +199,7 @@ class RaceState extends Thread {
 				}
 				
 				System.out.println();
-			}
+			} // for문 종료
 			
 			try {
 				Thread.sleep(100);
