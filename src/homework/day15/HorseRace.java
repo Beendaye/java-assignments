@@ -179,7 +179,7 @@ class RaceState extends Thread {
 	public void run() { // 말들의 현재 위치를 관찰해보자
 		while(true) {
 			
-			if(Horse.currRank == horseList.size()) {
+			if(Horse.currRank == horseList.size() + 1) {
 				break;
 			}
 			
