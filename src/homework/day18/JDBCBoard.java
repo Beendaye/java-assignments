@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class JDBCBoard {
 
-	private Connection conn;
+	private Connection conn; 
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
@@ -75,6 +75,19 @@ public class JDBCBoard {
 		System.out.println("===================================");
 		
 		try {
+			conn = JDBCUtil.getConnetion();
+			
+			String sql = "select * from jdbc_board"; // table 조회
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery(); // sql 실행 (select 실행)
+			
+			while(rs.next()) { // .next()로 행을 하나씩 내려가면서 읽음
+				String title = rs.getString("board_title");
+				String writer = rs.getString("board_writer");
+				
+			}
 			
 		} catch(SQLException ex) {
 			ex.printStackTrace();
