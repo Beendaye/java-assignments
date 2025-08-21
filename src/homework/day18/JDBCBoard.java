@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Scanner;
+
+import homework.day18.util.JDBCUtil;
 
 public class JDBCBoard {
 
@@ -70,9 +73,9 @@ public class JDBCBoard {
 	private void selectAllView() {
 		
 		System.out.println();
-		System.out.println("===================================");
-		System.out.println("no\t제목\t\t작성자\t내용");
-		System.out.println("===================================");
+		System.out.println("================================================================");
+		System.out.println("no\t제목\t\t작성자\t작성일\t내용");
+		System.out.println("================================================================");
 		
 		try {
 			conn = JDBCUtil.getConnetion();
@@ -84,22 +87,30 @@ public class JDBCBoard {
 			rs = pstmt.executeQuery(); // sql 실행 (select 실행)
 			
 			while(rs.next()) { // .next()로 행을 하나씩 내려가면서 읽음
+				int no = rs.getInt("board_no");
 				String title = rs.getString("board_title");
 				String writer = rs.getString("board_writer");
-				
+				LocalDate regDt = rs.getTimestamp("board_date").toLocalDateTime().toLocalDate();
+				String content = rs.getString("board_content");
+			
+				System.out.println(no + "\t" + title + "\t\t" + writer + "\t" + regDt + "\t" + content);
 			}
+			
+			System.out.println("------------------------------------------------------------");
+			System.out.println("전체 회원 정보 출력 완료");
 			
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		} finally {
-			
+			JDBCUtil.close(conn, stmt, pstmt, rs);
 		}
 		
 	}
 
 
 	public static void main(String[] args) {
-		
+		JDBCBoard boardObj = new JDBCBoard();
+		boardObj.start();
 	}
 
 }
