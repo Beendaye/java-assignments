@@ -30,7 +30,7 @@ public class Room implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Room [roomNum=" + roomNum + ", guest=" + guest + "]";
+		return "Room [roomNum=" + roomNum + ", guest=" + guest + "]" ;
 	}
 
 	
